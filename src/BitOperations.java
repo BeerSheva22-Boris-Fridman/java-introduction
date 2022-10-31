@@ -35,13 +35,12 @@ public class BitOperations {
      */
     static public long setBitValue(long number, int nBit, boolean value) {
     	long res = -1;
+    	long mask = 1 << nBit;
     	if (value) {
-    		long mask = 1 << nBit;
-    		res = mask | number;
+    		    		res = mask | number;
     	}   
     	    else {
-    	    	long mask = 1 << nBit;
-    	    	res = mask ^ number;
+    	    	    	    	res = mask ^ number;
     	    }
     	return res;
     }
