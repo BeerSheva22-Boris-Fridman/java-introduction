@@ -40,7 +40,8 @@ public class BitOperations {
     		    		res = mask | number;
     	}   
     	    else {
-    	    	    	    	res = mask ^ number;
+    	    	mask = ~ mask;    	    	
+    	    	res = mask & number;
     	    }
     	return res;
     }
