@@ -36,6 +36,7 @@ class PrimitivesTest {
 	private int getThirdDigit(int number) {return number %10; }
 
 	@Test
+	@Disabled
 	void getBitValueTest() {
 		long num = 0x3ab7f5; //001110101011011111_1_10101
 		assertEquals(1, BitOperations.getBitValue(num, 5));
@@ -46,17 +47,42 @@ class PrimitivesTest {
 		assertEquals(-1, BitOperations.getBitValue(num, -2));		
 	}
 	@Test
+	@Disabled
 	void setBitValueTest() {
 		long number = 0x3ab7f5; //001110101011011111_1_10101
 		assertEquals(0x3ab7f4, BitOperations.setBitValue(number, 0, false));
 		assertEquals(0x3ab7f5, BitOperations.setBitValue(number, 1, false));
-				assertEquals(0x3abff5, BitOperations.setBitValue(number, 11, true));
+		assertEquals(0x3abff5, BitOperations.setBitValue(number, 11, true));
 	}
 	@Test
+	@Disabled
 	void negateBitValueTest() {
 		long number = 0x3ab7f5; //001110101011011111_1_10101
-		assertEquals(0x3ab7b5, BitOperations.negateBitValue(number, 6));
-		assertEquals(0x3ab7f4, BitOperations.negateBitValue(number, 0));
+		assertEquals(0x3ab7b5, BitOperations.invertBitValue(number, 6));
+		assertEquals(0x3ab7f4, BitOperations.invertBitValue(number, 0));
 	}
-	 
+
+	@Test
+	void oneInNumberTest() {
+		long number = 0x3ab7f5; //111 0 1 0 1 0 11 0 111 1111 0 1 0 1
+		assertEquals(16, BitOperations.oneInNumber(number));
+	}
+	
+	@Test
+	void leadingZerosTest() {
+		long number = 0; 
+		assertEquals(64, BitOperations.leadingZeros(number));
+	}
+	
+	@Test
+	void isHappyNumberTest() {
+		int number = 123411;
+		int number1 = 555411;
+		int numberIncorrectLength = 111111111;
+		int numberIncorrectLength1 = 111;
+		assertEquals(true, Numbers.isHappyNumber(number));
+		assertEquals(false, Numbers.isHappyNumber(number1));
+		assertEquals(false, Numbers.isHappyNumber(numberIncorrectLength));
+		assertEquals(false, Numbers.isHappyNumber(numberIncorrectLength1));
+	}
 }
