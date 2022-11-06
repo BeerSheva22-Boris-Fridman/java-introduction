@@ -46,13 +46,17 @@ public class SportLotoAppl {
  * using bit operations
 *  */	
 	public static void main(String[] args) {
-		long usedNumbers = 0;
-		for (int i = 0; i < 6; i++) {
-			int tempNumber = getRandomInt(1, 49);
-			if (BitOperations.getBitValue(usedNumbers, tempNumber) == 0) {
-				usedNumbers = BitOperations.invertBitValue(usedNumbers, tempNumber);
-				System.out.print(tempNumber + " ");
+
+		long outputNumbers = 0;
+		int i = 0;
+		while (i <= 5) {
+			int randomNumber = getRandomInt(1, 49);
+			if (BitOperations.getBitValue(outputNumbers, randomNumber) == 0) {
+				i++;
+				outputNumbers = BitOperations.invertBitValue(outputNumbers, randomNumber);
+								System.out.print(randomNumber + " ");
 			}
+		
 		   }
 	      }
 
