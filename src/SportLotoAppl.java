@@ -49,7 +49,7 @@ public class SportLotoAppl {
 
 		long outputNumbers = 0;
 		int i = 0;
-		while (i <= 5) {
+		while (i < 6) {
 			int randomNumber = getRandomInt(1, 49);
 			if (BitOperations.getBitValue(outputNumbers, randomNumber) == 0) {
 				i++;
