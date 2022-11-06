@@ -33,7 +33,7 @@ static public boolean isHappyNumber(int number) {
 	int half = length/2; //to find half length of the number to sum first and last digits seperately.
 		
 	for(int i=0; i<half && number>0; i++){ //to sum last digits
-			secondThree = secondThree + number%10;
+		secondThree = secondThree + number%10;
 	    number = number/10;
 	}
 		for(int i=0; i<half && number>0; i++){ //to sum first digits
