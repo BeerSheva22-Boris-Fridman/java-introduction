@@ -56,7 +56,6 @@ public class SportLotoAppl {
 				outputNumbers = BitOperations.invertBitValue(outputNumbers, randomNumber);
 								System.out.print(randomNumber + " ");
 			}
-		
 		   }
 	      }
 
