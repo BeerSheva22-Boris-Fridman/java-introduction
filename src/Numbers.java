@@ -1,50 +1,56 @@
 
 public class Numbers {
-static public int getNdigits(long number) {
-	int res = 0;
-	do {
-		number /= 10;
-		res++;
-	} while(number !=0);
-	return res;
-}
+	public static final int N_HAPPY_NUMBER_DIGITS = 6;
 
-/**
- * 
- * @param number
- * @return true only if number comprises of 6 digits
- * and summ of first 3 digits equals the sum of last 3 digits
- */
-
-
-
-static public boolean isHappyNumber(int number) {
-	int firstThree = 0;
-	int secondThree = 0;
-	int length = 0;
-	long temp = 1;
-	while (temp <= number) {
-		length++;
-		temp *= 10;
+	static public int getNdigits(long number) {
+		int res = 0;
+		do {
+			number /= 10;
+			res++;
+		} while (number != 0);
+		return res;
 	}
-	if (length > 6 || length < 6) {
-		return false;
-	}
-	int half = length/2; //to find half length of the number to sum first and last digits seperately.
-		
-	for(int i=0; i<half && number>0; i++){ //to sum last digits
-		secondThree = secondThree + number%10;
-	    number = number/10;
-	}
-		for(int i=0; i<half && number>0; i++){ //to sum first digits
-		firstThree = firstThree + number%10;
-	    number = number/10;
+
+	/**
+	 * 
+	 * @param number
+	 * @return true only if number comprises of 6 digits and sum of first three
+	 *         digits equals the sum of last three digits
+	 */
+	static public boolean isHappyNumber(int number) {
+		boolean res = false;
+		number = Math.abs(number);
+		if (getNdigits(number) == N_HAPPY_NUMBER_DIGITS) {
+			int halfDigits = N_HAPPY_NUMBER_DIGITS / 2;
+			int numberPartDivider = (int) Math.pow(10, halfDigits);
+			int sumFirstPart = getSumDigits(number / numberPartDivider);
+			res = sumFirstPart == getSumDigits(number % numberPartDivider);
+
 		}
+		return res;
+	}
 
-	if (secondThree == firstThree) {
-		return true; 
+	public static int getSumDigits(int number) {
+		int res = 0;
+		do {
+			res += number % 10;
+			number /= 10;
+		} while (number != 0);
+		return res;
 	}
-	return false;
+	public static int[] getDigits(int number) {
+		int res[] = new int[getNdigits(number)];
+		for(int i = res.length - 1; i >= 0; i--) {
+			res[i] = number % 10;
+			number /= 10;
+		}
+		return res;
 	}
+	public static int getNumberFromDigits(int[] digits) {
+		int res = 0;
+		for(int i = 0; i < digits.length; i++) {
+			res = res * 10 + digits[i];
+		}
+		return res;
 	}
-	
+}
