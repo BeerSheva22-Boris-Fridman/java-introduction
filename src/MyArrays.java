@@ -41,6 +41,7 @@ public class MyArrays {
  * @param arraySorted - sorted array
  * @param number
  * @return new array with inserted number at an index for keeping array sorted
+ * 
  */
 	public static int[] insertSorted(int arraySorted[], int number) {
 		//TODO
