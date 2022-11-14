@@ -30,7 +30,7 @@ public class Numbers {
 		return res;
 	}
 
-	public static int getSumDigits(int number) {
+	private static int getSumDigits(int number) {
 		int res = 0;
 		do {
 			res += number % 10;
@@ -52,5 +52,8 @@ public class Numbers {
 			res = res * 10 + digits[i];
 		}
 		return res;
+	}
+	public static long getRandomNumber(long min, long max) {
+		return (long) (min + Math.random() * (max - min + 1));
 	}
 }

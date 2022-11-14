@@ -121,12 +121,13 @@ class PrimitivesTest {
 	@Test
 	void IsraelIdVerification() {
 		int expectedNumber = 346847874;
-		assertTrue(IsraelIdentity.IsraelIdVerification(expectedNumber));
+		assertTrue(IsraelIdentity.verify(expectedNumber));
 
 	}
 	@Test
+	@Disabled
 	void generateRandomIDTest() {
-		assertTrue(IsraelIdentity.IsraelIdVerification(IsraelIdentity.generateRandomID()));
+		assertTrue(IsraelIdentity.generateRandomId(IsraelIdentity.generateRandomId()));
 
 	}
 
@@ -138,4 +139,12 @@ class PrimitivesTest {
 		assertEquals(7, newArray[newArray.length - 1]);
 		System.out.print(Arrays.toString(newArray));
 	}
+	
+	
+	 @Test
+	 void getNumberFromDigitsTest() {
+		 int expectedNumber = 1234;
+		
+		 assertEquals(expectedNumber, Numbers.getNumberFromDigits(new int[]{1, 2, 3, 4}));
+	 }
 }
