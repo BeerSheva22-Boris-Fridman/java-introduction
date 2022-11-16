@@ -1,7 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +14,10 @@ class PrimitivesTest {
 		long l = (long) 10.1;
 		byte b1 = (byte) 1000;
 		a = (short) l;
-		float f = 10.2f; // ставим f что бы принялось как флоат
+		float f = 10.2f;
 		int b2 = 0xfffffff1;
 
-		assertEquals(-15, b2); // сравнение, что одно равно другому
+		assertEquals(-15, b2);
 	}
 
 	@Test
@@ -35,15 +33,19 @@ class PrimitivesTest {
 
 	}
 
+	// Assumption: all three methods take number comprising of three digits
 	private int getFirstDigit(int number) {
-		return number / 100;
+
+		return number / 100 % 10;
 	}
 
 	private int getSecondDigit(int number) {
-		return (number / 10) % 10;
+
+		return number / 10 % 10;
 	}
 
 	private int getThirdDigit(int number) {
+
 		return number % 10;
 	}
 
@@ -57,50 +59,49 @@ class PrimitivesTest {
 		assertEquals(1, BitOperations.getBitValue(num, 2));
 		assertEquals(-1, BitOperations.getBitValue(num, 100));
 		assertEquals(-1, BitOperations.getBitValue(num, -2));
+
 	}
 
 	@Test
 	@Disabled
 	void setBitValueTest() {
-		long number = 0x3ab7f5; // 001110101011011111_1_10101
-		assertEquals(0x3ab7f4, BitOperations.setBitValue(number, 0, false));
-		assertEquals(0x3ab7f5, BitOperations.setBitValue(number, 1, false));
-		assertEquals(0x3abff5, BitOperations.setBitValue(number, 11, true));
+		long number = 0x3ab7f5; // 0011_1010_1011_0111_1111_0101
+		assertEquals(0x3ab7d5, BitOperations.setBitValue(number, 5, false));
+		assertEquals(0x3ab7f5, BitOperations.setBitValue(number, 5, true));
+		assertEquals(0x2ab7f5, BitOperations.setBitValue(number, 20, false));
+		assertEquals(0x1ab7f5, BitOperations.setBitValue(number, 21, false));
 	}
 
 	@Test
 	@Disabled
-	void negateBitValueTest() {
+	void revertBitValueTest() {
 		long number = 0x3ab7f5; // 001110101011011111_1_10101
-		assertEquals(0x3ab7b5, BitOperations.invertBitValue(number, 6));
+		assertEquals(0x3ab7d5, BitOperations.invertBitValue(number, 5));
 		assertEquals(0x3ab7f4, BitOperations.invertBitValue(number, 0));
+		number = -1;
+
+		assertEquals(1, BitOperations.getBitValue(number, 63));
+		number = BitOperations.invertBitValue(number, 63);
+		assertEquals(0, BitOperations.getBitValue(number, 63));
 	}
 
 	@Test
-	@Disabled
-	void oneInNumberTest() {
-		long number = 0x3ab7f5; // 111 0 1 0 1 0 11 0 111 1111 0 1 0 1
-		assertEquals(16, BitOperations.oneInNumber(number));
+	void digitsNumberTest() {
+		// TODO
 	}
 
 	@Test
-	@Disabled
 	void leadingZerosTest() {
-		long number = 0;
-		assertEquals(64, BitOperations.leadingZeros(number));
+		// TODO
 	}
 
 	@Test
 	@Disabled
 	void isHappyNumberTest() {
-		int number = 123411;
-		int number1 = 555411;
-		int numberIncorrectLength = 111111111;
-		int numberIncorrectLength1 = 111;
-		assertEquals(true, Numbers.isHappyNumber(number));
-		assertEquals(false, Numbers.isHappyNumber(number1));
-		assertEquals(false, Numbers.isHappyNumber(numberIncorrectLength));
-		assertEquals(false, Numbers.isHappyNumber(numberIncorrectLength1));
+		int expectedTrue = 123321;
+		int expectedFalse = 123467;
+		assertTrue(Numbers.isHappyNumber(expectedTrue));
+		assertFalse(Numbers.isHappyNumber(expectedFalse));
 	}
 
 	@Test
@@ -112,39 +113,51 @@ class PrimitivesTest {
 
 	@Test
 	@Disabled
-	void getNumberDigitsTest() {
+	void getNumberFromDigitsTest() {
 		int expectedNumber = 1234;
+
 		assertEquals(expectedNumber, Numbers.getNumberFromDigits(new int[] { 1, 2, 3, 4 }));
+	}
+
+	@Test
+	void bibarySearchTest() {
+		int ar[] = { 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 20, 40 };
+		assertEquals(-14, MyArrays.binarySearch(ar, 3));
+		assertEquals(3, MyArrays.binarySearch(ar, 2));
+		assertEquals(-1, MyArrays.binarySearch(ar, 0));
+		assertEquals(13, MyArrays.binarySearch(ar, 4));
+		assertEquals(0, MyArrays.binarySearch(ar, 1));
+		assertEquals(-16, MyArrays.binarySearch(ar, 25));
+		assertEquals(-17, MyArrays.binarySearch(ar, 45));
+	}
+
+	@Test
+@Disabled
+	void isOneSwapTestFalse() {
+		int ar1[] = { 1, 2, 3, 10, -1, 5, 6 };
+		int ar2[] = { 1, 2, 3, 4, 5, 10 };
+		int ar3[] = { 5, 1, 2, 4, 6, 10 };
+		int ar4[] = { 1, 5, 2, 4, 3, 10 };
+		int ar5[] = { 1, 3, 2, 5, 4, 10, 8 };
+		int ar6[] = { 1, 3, 20, 4, 5, 6, 10 };
+		assertFalse(MyArrays.isOneSwapForSorted(ar1));
+		assertFalse(MyArrays.isOneSwapForSorted(ar2));
+		assertFalse(MyArrays.isOneSwapForSorted(ar3));
+		assertFalse(MyArrays.isOneSwapForSorted(ar4));
+		assertFalse(MyArrays.isOneSwapForSorted(ar5));
+		assertFalse(MyArrays.isOneSwapForSorted(ar6));
 
 	}
 
 	@Test
-	void IsraelIdVerification() {
-		int expectedNumber = 346847874;
-		assertTrue(IsraelIdentity.verify(expectedNumber));
-
-	}
+	void isSum2Test() {
+		short[] arr1 = { 6, 3, 6, 1, 3, 5, 4};
+			assertTrue(MyArrays.isSum2(arr1, (short) 7));
+		}
 	@Test
-	@Disabled
-	void generateRandomIDTest() {
-		assertTrue(IsraelIdentity.generateRandomId(IsraelIdentity.generateRandomId()));
-
+	void isSum2TestFalse() {
+		short[] arr1 = { 6, 3, 6, 1, 3, 5, 4};
+			assertFalse(MyArrays.isSum2(arr1, (short) 25));
 	}
 
-	@Test
-	void addsNumberTest() {
-		int firstArray[] = { 1, 2, 3, 4, 5, 6 };
-		int number = 7;
-		int newArray[] = MyArrays.addsNumber(firstArray, number);
-		assertEquals(7, newArray[newArray.length - 1]);
-		System.out.print(Arrays.toString(newArray));
-	}
-	
-	
-	 @Test
-	 void getNumberFromDigitsTest() {
-		 int expectedNumber = 1234;
-		
-		 assertEquals(expectedNumber, Numbers.getNumberFromDigits(new int[]{1, 2, 3, 4}));
-	 }
 }
