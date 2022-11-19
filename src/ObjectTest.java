@@ -27,19 +27,30 @@ class ObjectTest {
 	@Test
 	void AnagramTestTrue() {		
 		String word = "yellow";
-		assertTrue(isAnagram(word, "loweyl"));
-		assertTrue(isAnagram(word, "elolyw"));
-		assertTrue(isAnagram(word, "wolley"));
-		assertTrue(isAnagram(word, "loleyw"));
+		assertTrue(Strings.isAnagram(word, "loweyl"));
+		assertTrue(Strings.isAnagram(word, "elolyw"));
+		assertTrue(Strings.isAnagram(word, "wolley"));
+		assertTrue(Strings.isAnagram(word, "loleyw"));
 	}
 	@Test
 	void AnagramTestFalse() {
 		String word = "yellow";
-		assertFalse(isAnagram(word,""));
-		assertFalse(isAnagram(word, "yellob"));
-		assertFalse(isAnagram(word,"yello"));
-		assertFalse(isAnagram(word,"yelllo"));
+		assertFalse(Strings.isAnagram(word,""));
+		assertFalse(Strings.isAnagram(word, "yellob"));
+		assertFalse(Strings.isAnagram(word,"yello"));
+		assertFalse(Strings.isAnagram(word,"yelllo"));
 	}
 	
-	
+//	@Test
+//	@Disable
+//	void isSum2Test() {
+//		short[] arr1 = { 6, 3, 6, 1, 3, 5, 4};
+//			assertTrue(Strings.isSum2(arr1, (short) 7));
+//		}
+//	@Test
+//	@Disable
+//	void isSum2TestFalse() {
+//		short[] arr1 = { 6, 3, 6, 1, 3, 5, 4};
+//			assertFalse(Strings.isSum2(arr1, (short) 25));
+//	}
 }
