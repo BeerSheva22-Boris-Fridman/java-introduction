@@ -41,16 +41,5 @@ class ObjectTest {
 		assertFalse(Strings.isAnagram(word,"yelllo"));
 	}
 	
-//	@Test
-//	@Disable
-//	void isSum2Test() {
-//		short[] arr1 = { 6, 3, 6, 1, 3, 5, 4};
-//			assertTrue(Strings.isSum2(arr1, (short) 7));
-//		}
-//	@Test
-//	@Disable
-//	void isSum2TestFalse() {
-//		short[] arr1 = { 6, 3, 6, 1, 3, 5, 4};
-//			assertFalse(Strings.isSum2(arr1, (short) 25));
-//	}
+
 }
