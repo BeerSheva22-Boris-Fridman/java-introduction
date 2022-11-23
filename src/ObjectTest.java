@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class ObjectTest {
@@ -39,7 +40,63 @@ class ObjectTest {
 		assertFalse(Strings.isAnagram(word, "yellob"));
 		assertFalse(Strings.isAnagram(word,"yello"));
 		assertFalse(Strings.isAnagram(word,"yelllo"));
+		//assertFalse(Strings.isAnagram("yttttoooo", "yoootttty")); 
+	}
+	@Test
+	void javavariableTest( ) {
+		assertTrue("java".matches(Strings.javaNameExp()));
+		assertFalse("1java".matches(Strings.javaNameExp()));
+		assertFalse("_".matches(Strings.javaNameExp()));
+		assertTrue("__".matches(Strings.javaNameExp()));
+		assertTrue("java_1_2".matches(Strings.javaNameExp()));
+		assertTrue("$".matches(Strings.javaNameExp()));
+		assertFalse("$ _".matches(Strings.javaNameExp()));
 	}
 	
+	@Test
+	void ipV4OctetTest( ) {
+	assertTrue("000".matches(Strings.ipV4Octet()));
+		assertTrue("123".matches(Strings.ipV4Octet()));
+		assertTrue("255".matches(Strings.ipV4Octet()));
+		assertTrue("1".matches(Strings.ipV4Octet()));
+		assertTrue("12".matches(Strings.ipV4Octet()));	
+		
+		assertFalse("1java".matches(Strings.ipV4Octet()));
+		assertFalse("java".matches(Strings.ipV4Octet()));
+		assertFalse("__123".matches(Strings.ipV4Octet()));
+		assertFalse("_ 123".matches(Strings.ipV4Octet()));
+		assertFalse("_123".matches(Strings.ipV4Octet()));
+		assertFalse("$ _".matches(Strings.ipV4Octet()));
+		assertFalse(" ".matches(Strings.ipV4Octet()));
+		assertFalse("256".matches(Strings.ipV4Octet()));
+		assertFalse("1255".matches(Strings.ipV4Octet()));
+	
+		
+	}
+	@Test
+	void ipV4Test( ) {
+		assertTrue("000.000.000.000".matches(Strings.ipV4()));
+		assertTrue("0.0.0.0".matches(Strings.ipV4()));
+		assertTrue("255.255.255.255".matches(Strings.ipV4()));
+		assertTrue("123.000.235.024".matches(Strings.ipV4()));
+		assertTrue("1.000.235.024".matches(Strings.ipV4()));
+		assertTrue("11.000.235.024".matches(Strings.ipV4()));
+		assertTrue("10.29.166.193".matches(Strings.ipV4()));
+		assertTrue("23.00.23.04".matches(Strings.ipV4()));
+				
+		assertFalse("1java".matches(Strings.ipV4()));
+		assertFalse("java".matches(Strings.ipV4()));
+		assertFalse("_23.123.232.231".matches(Strings.ipV4()));
+		assertFalse(" 23.1.1.1".matches(Strings.ipV4()));
+		assertFalse("_123".matches(Strings.ipV4()));
+		assertFalse("$ _".matches(Strings.ipV4()));
+		assertFalse(" ".matches(Strings.ipV4()));
+		assertFalse("256.1.1.1".matches(Strings.ipV4()));
+		assertFalse("1255.221.001.222".matches(Strings.ipV4()));
+		assertFalse("111.111.111.111.111".matches(Strings.ipV4()));
+		assertFalse("123.000.235".matches(Strings.ipV4()));
+		assertFalse("12".matches(Strings.ipV4()));
+		
+	}
 
 }

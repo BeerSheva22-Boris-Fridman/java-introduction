@@ -52,5 +52,20 @@ public static void sortStringNumbers () {
 			}
 		}
 	}
+public static String javaNameExp( ) {
+	
+	return "[a-zA-Z$][\\w$]*|_[\\w$]+";
+}
+public static String ipV4Octet() {
+	 
+	return "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+}
+public static String ipV4() {
+		
+	return "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+           "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+          "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+           "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+}
 }
 
