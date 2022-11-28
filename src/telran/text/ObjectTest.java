@@ -1,8 +1,9 @@
-
+package telran.text;
 import static org.junit.jupiter.api.Assertions.*;
-inport static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Disabled;
+import static telran.text.Strings.*;
 import org.junit.jupiter.api.*;
+
+
 
 class ObjectTest {
 
@@ -80,7 +81,7 @@ class ObjectTest {
 		assertTrue("0.0.0.0".matches(Strings.ipV4()));
 		assertTrue("255.255.255.255".matches(Strings.ipV4()));
 		assertTrue("123.000.235.024".matches(Strings.ipV4()));
-		assertTrue("1.000.235.024".matches(Strings.ipV4()));
+		assertTrue("1.000.235.024".matches(ipV4()));
 		assertTrue("11.000.235.024".matches(Strings.ipV4()));
 		assertTrue("10.29.166.193".matches(Strings.ipV4()));
 		assertTrue("23.00.23.04".matches(Strings.ipV4()));
@@ -99,5 +100,35 @@ class ObjectTest {
 		assertFalse("12".matches(Strings.ipV4()));
 		
 	}
-
+	@Test
+//	@Disabled
+	void computeExpressionTest() {
+		assertEquals(10.5, computeArithmeticExpression("2 + 2 + 1 * 2 + 0.5", null, null));
+		assertEquals(25.5, computeArithmeticExpression("2 + 2 + 1 * 2 + 0.5 + a + b", new double[] {15, 0}, new String[] {"a", "b"}));
+		assertEquals(15, computeArithmeticExpression("2 + 2 + 1 * 2 + 0.5 + a + b + 4.5 / 2", new double[] {15, 0}, new String[] {"a", "b"}));
+		assertEquals(15, computeArithmeticExpression("2 + (2 + 1 * 2) + (0.5 + a) + b + 4.5 / 2", new double[] {15, 0}, new String[] {"a", "b"}));
+		assertTrue(Double.isNaN(computeArithmeticExpression("2 (+ 2) + 1 * 2 + 0.5 + a + b", new double[] {15,25, 0}, new String[] {"a", "b"})));
+		assertTrue(Double.isNaN(computeArithmeticExpression("2 + 2 + 1 * 2 + 0.5 + a + b", new double[] {15,25, 0}, new String[] {"a", "b"})));
+		assertTrue(Double.isNaN(computeArithmeticExpression("2 + 2 + 1 * 2 + 0.5 + ImNotAvariable + b", new double[] {15,25, 0}, new String[] {"a", "b"})));
+		assertTrue(Double.isNaN(computeArithmeticExpression("2 + 2 + 1 * 2 + 0.5 + a + b", new double[] {15,25}, new String[] {"a", "b", "c"})));
+		assertTrue(Double.isNaN(Strings.computeArithmeticExpression("2 # 2 ++ 10", null, null)));
+		assertEquals(10.5, Strings.computeArithmeticExpression("2 + 2 + 1 * 2 + 0.5", new double[] {2,1}, new String[] {"a", "c"}));
+		assertTrue(Double.isNaN(Strings.computeArithmeticExpression("2 + 2 + 1 * 2 + d23", new double[] {2,1}, new String[] {"a", "c"}))); 
+	}
+	@Test
+	void Braces() {
+		assertTrue(checkBraces("2 + 2 + 1 * 2 + 0.5"));
+	}
+	@Test
+	void hhhTest( ) {
+		assertTrue("2+2+1*2+0.5".matches(arithmeticExpression()));
+	}
+	
+	@Test
+	void ggg() {
+		String r = "b";
+		assertEquals(0, getOperandValue(r, new double[] {15, 0}, new String[] {"a", "b"}));
+	}
 }
+	
+	
