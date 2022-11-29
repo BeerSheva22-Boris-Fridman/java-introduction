@@ -176,7 +176,7 @@ public static boolean checkBraces(String expression) {
 		}
 					if (count == 0) {
 						res = true;
-					}
+					} 
 	return res; 
 }
 }
